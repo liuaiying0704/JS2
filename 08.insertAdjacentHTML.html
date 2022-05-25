@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>我是后来加入的</div>
+    <script>
+      // element.insertAdjacentHTML(position, text);
+      document
+        .querySelector('div')
+        .insertAdjacentHTML('beforebegin', '<span>兄弟--前面</span>'); //兄弟--前面
+
+      document
+        .querySelector('div')
+        .insertAdjacentHTML('afterend', '<span>兄弟--后面</span>'); //兄弟--后面
+
+      // document
+      //   .querySelector('div')
+      //   .insertAdjacentHTML('afterbegin', '<span>子级--前面</span>'); //子级--前面
+      // document
+      //   .querySelector('div')
+      //   .insertAdjacentHTML('beforeend', '<span>子级--后面</span>'); //子级--后面
+      //
+    </script>
+  </body>
+</html>
