@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      function Star(uname, age) {
+        this.uname = uname;
+        this.age = age;
+      }
+      Star.prototype.sing = function () {
+        console.log('我会唱歌');
+      };
+      var ldh = new Star('刘德华', 18);
+      // 实例对象的原型是ldh.__proto__
+      // 1. 只要是对象就有 __proto__ 原型, 指向原型对象
+      // 2. 我们Star原型对象里面的 __proto__ 原型指向的是 Object.prototype
+      // 3. 我们Object.prototype原型对象里面的__proto__原型  指向为 null
+
+      console.log(ldh.__proto__); //Star.prototype
+      console.log(ldh.__proto__.constructor); //star构造函数===Star.prototype.constructor
+      console.log(ldh.__proto__.__proto__); //Object.prototype;顶级原型对象
+      console.log(ldh.__proto__.__proto__.constructor); //object构造函数
+      console.log(ldh.__proto__.__proto__.__proto__); //null，从无到有，js所有的产生于object的原型对象Object.prototype。
+    </script>
+  </body>
+</html>

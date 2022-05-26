@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      function Star(uname, age) {
+        this.uname = uname;
+        this.age = age;
+        //  1、占用内存
+      }
+      // Star.prototype.sing = function () {
+      //   console.log('我会唱歌');
+      // };
+      // Star.prototype.movie = function () {
+      //   console.log('我会演电影');
+      // };
+      //	很多情况下，我们需要手动的利用 constructor 这个属性指回 原本的构造函数
+      //  赋值，覆盖原型对象，因此通过constructor.Star指回构造函数。
+      Star.prototype = {
+        constructor: Star,
+        sing: function () {
+          console.log('我会唱歌');
+        },
+        movie: function () {
+          console.log('我会演电影');
+        },
+      };
+
+      var ldh = new Star('刘德华', 18);
+      var zxy = new Star('张学友', 19);
+      console.log(ldh);
+      ldh.sing(); //我会唱歌
+      console.log(ldh.age); //18
+
+      //	很多情况下，我们需要手动的利用 constructor 这个属性指回 原本的构造函数
+      //	如果我们修改了原本的原型对象，为原本的原型对象赋值一个新的对象，则必须手动将 constructor 属性指向原本的构造函数
+      console.log(Star.prototype); //构造函数通过Star.prototype指向原型对象
+      console.log(ldh.__proto__); //实例对象通过ldh.__proto__指向原型对象，自身是没有方法，
+      // {constructor: ƒ, sing: ƒ, movie: ƒ}
+
+      console.log(Star.prototype.constructor); //指回构造函数
+      console.log(ldh.__proto__.constructor); //通过原型对象指回构造函数
+      console.log(ldh.__proto__ === Star.prototype); //true
+      // ƒ Star(uname, age) {
+      //   this.uname = uname;
+      //   this.age = age;
+      // }
+    </script>
+  </body>
+</html>

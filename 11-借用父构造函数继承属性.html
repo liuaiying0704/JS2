@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // 借用父构造函数继承属性
+      // 1. 父构造函数
+      function Father(uname, age) {
+        this.uname = uname;
+        this.age = age;
+      }
+      function Son(uname, age, sex) {
+        Father.call(this, uname, age);
+        this.sex = sex;
+      }
+      var ldh = new Son('刘德华', 18, '帅哥');
+      console.log(ldh);
+      // 2 .子构造函数
+    </script>
+  </body>
+</html>

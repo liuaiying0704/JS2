@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // 借用父构造函数继承方法
+      // 1. 父构造函数
+      function Father(uname, age) {
+        // this 指向父构造函数的对象实例
+        this.uname = uname;
+        this.age = age;
+      }
+      Father.prototype.money = function () {
+        console.log('我有100万');
+      };
+      // 2 .子构造函数
+      function Son(uname, age, score) {
+        // this 指向子构造函数的对象实例
+        Father.call(this, uname, age);
+        this.score = score;
+      }
+      var son = new Son('刘德华', 18, 100);
+      console.log(son.uname);
+      //3、 继承方法⭐️⭐️⭐️
+
+      // Son.prototype = new Father();
+      // new Father();实例对象里面只有属性，，方法在原型对象里。⭐️⭐️
+
+      // 问题1：使用call方法只能继承 Father 的属性，而不能继承方法
+      // 解决方案1：让 Son 的 prototype 指向 Father 的 prototype。
+      // Son.prototype = Father.prototype;
+      // 问题2：
+      /*使用方案1解决会出现 Son 和 Father 的 prototype 指向同一个对象，同一个堆
+        那么修改 Son 的 prototype 时，Father 的 prototype 也会变化。
+      */
+
+      // 解决方案2: 让 Son 的 prototype 指向 Father 的对象实例
+      Son.prototype = new Father();
+      Son.prototype.exam = function () {
+        console.log('我要考试');
+      };
+
+      // 问题3：
+      /*让 Son 的 prototype 指向 Father 的对象实例后，Son 的原型对象的 constructor 属性会
+        指向 Father ，这时需要我们手动将 constructor 属性指回 Son
+      */
+      Son.prototype.constructor = Son; //属性改成Son⭐️
+
+      // ldh.money();
+      console.log(Son.prototype);
+
+      console.log(Son.prototype.__proto__); //继承父级的方法
+      //等同于
+      console.log(new Father().__proto__); //继承父级的方法
+      console.log(Father.prototype); //父亲的原型对象里的方法
+
+      console.log(Son.prototype.constructor); //检测构造函数是否是自己Son的。已改回son
+
+      // 使用方法
+      var ldh = new Son('刘德华', 18, 100);
+      console.log(ldh.__proto__);
+
+      ldh.money();
+    </script>
+  </body>
+</html>

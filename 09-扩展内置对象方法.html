@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // 原型对象的应用 扩展内置对象方法
+      // console.log(Array.prototype);
+      Array.prototype.sum = function () {
+        var res = 0;
+        for (var i = 0; i < this.length; i++) {
+          res += this[i];
+        }
+        return res;
+      };
+
+      // 内置对象不会被覆盖
+      // Array.prototype = {
+      //   sum: function () {
+      //     var res = 0;
+      //     for (var i = 0; i < this.length; i++) {
+      //       res += this[i];
+      //     }
+      //     return res;
+      //   },
+      // };
+
+      var arr1 = [88, 99, 23];
+      console.log(arr1.sum());
+      console.log(Array.prototype);
+    </script>
+  </body>
+</html>
