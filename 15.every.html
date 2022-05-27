@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   遍历每一项，，有一项不符合就返回,结束循环
+      var arr = [2, 3, 4];
+      var res = arr.every(function (item) {
+        console.log(1); //找到有一个不符合的就结束循环
+        return item > 1;
+      });
+      console.log(res); //true  false
+    </script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // filter 筛选数组
+      var arr = [12, 66, 4, 88, 3, 7];
+      var newArr = arr.filter(function (item) {
+        console.log(1);
+        return item > 20; //必须return 表达式
+        //  遍历这一项是，true返回这一项。
+        // return 0; //[]
+        // return 1;//[12, 66, 4, 88, 3, 7]
+      });
+      console.log(newArr); //[66,88]
+    </script>
+  </body>
+</html>

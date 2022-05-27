@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // Object.defineProperty() 定义新属性或修改原有的属性
+      var obj = {
+        id: 1,
+        pname: '小米',
+        price: 1999,
+      };
+      // 1、回顾以前添加、修改属性
+      // obj.num = 12; //添加属性
+      // obj.id = 3; //修改属性
+      // console.log(obj);
+
+      // 2、Object.defineProperty( obj,prop,description) 定义新属性或修改原有的属性
+      Object.defineProperty(obj, 'num', {
+        value: 1000, //设置属性值
+        writable: false, //值是否可以重写
+        enumerable: false, //是否可以被枚举，遍历
+        configurable: false, //目标属性是否可以改写或删除
+      });
+      console.log(obj);
+    </script>
+  </body>
+</html>

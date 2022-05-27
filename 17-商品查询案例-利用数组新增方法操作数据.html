@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      table {
+        width: 400px;
+        border: 1px solid #000;
+        border-collapse: collapse;
+        margin: 0 auto;
+      }
+
+      td,
+      th {
+        border: 1px solid #000;
+        text-align: center;
+      }
+
+      input {
+        width: 50px;
+      }
+
+      .search {
+        width: 600px;
+        margin: 20px auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="search">
+      按照价格查询: <input type="text" class="start" /> -
+      <input type="text" class="end" />
+      <button class="search-price">搜索</button> 按照商品名称查询:
+      <input type="text" class="product" />
+      <button class="search-pro">查询</button>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>产品名称</th>
+          <th>价格</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <script>
+      // 利用新增数组方法操作数据
+      var data = [
+        {
+          id: 1,
+          pname: '小米',
+          price: 3999,
+        },
+        {
+          id: 2,
+          pname: 'oppo',
+          price: 999,
+        },
+        {
+          id: 3,
+          pname: '荣耀',
+          price: 1299,
+        },
+        {
+          id: 4,
+          pname: '华为',
+          price: 1999,
+        },
+      ];
+      // 1. 获取相应的元素
+      // filter 也是查找满足条件的元素 返回的是一个数组  循环一遍    return
+      // every找false,查找数组中【不满足】条件的元素    返回布尔值   return
+      // some 找true,查找数组中【第一个满足】条件的元素  返回布尔值   return
+      var tb = document.querySelector('tbody');
+      // 2. 把数据渲染到页面中
+      function renderData(data) {
+        tb.innerHTML = ''; //先清除原来的
+        data.forEach(function (item) {
+          // 创建一个tr元素
+          var tr = document.createElement('tr');
+          // tr的值是data的数据中的每一个对象
+          tr.innerHTML = `<td>${item.id}</td>
+          <td>${item.pname}</td>
+          <td>${item.price}</td>`;
+          //对tb元素追加tr
+          tb.appendChild(tr);
+        });
+      }
+      renderData(data);
+      // 3. 根据价格查询商品
+      // 当我们点击了按钮,就可以根据我们的商品价格去筛选数组里面的对象
+      var start = document.querySelector('.start');
+      var end = document.querySelector('.end');
+      var pnameInp = document.querySelector('.product');
+      var btnSearch = document.querySelector('.search-price');
+      // 获取搜索的按钮
+      var btnPro = document.querySelector('.search-pro');
+      // 获取查询的按钮
+      btnSearch.onclick = function () {
+        if (start.value > end.value) {
+          alet('请重新输入');
+          return;
+        }
+        var priceArr = data.filter(function (item) {
+          return (
+            item.price >= start.value.trim() && item.price <= end.value.trim()
+          );
+        });
+        renderData(priceArr);
+      };
+      // 4. 根据商品名称查找商品
+      // 如果查询数组中唯一的元素, 用some方法更合适,因为它找到这个元素,就不在进行循环,效率更高
+      btnPro.addEventListener('click', function () {
+        var newArr = [];
+        data.some(function (item) {
+          if (item.pname === pnameInp.value.trim()) {
+            newArr.push(item);
+            return true;
+          }
+          return false;
+        });
+        renderData(newArr);
+      });
+    </script>
+  </body>
+</html>
