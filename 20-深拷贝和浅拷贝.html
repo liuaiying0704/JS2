@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // 浅拷贝只是拷贝一层，更深层次的对象级别的只拷贝引用
+      var obj = {
+        id: 1,
+        name: '章三',
+        msg: {
+          age: 18,
+        },
+        color: ['red', 'green', 'yellow'],
+      };
+
+      var o = {};
+      // 浅拷贝
+      // for (var k in obj) {
+      //   o[k] = obj[k];
+      // }
+      // o.id = 666;
+      // console.log(o);
+      // console.log(obj);
+
+      Object.assign(o, obj);
+      o.id = 666;
+      console.log(o);
+      console.log(obj);
+
+      // 深拷贝
+      // function deepCopy(newobj, oldobj) {
+      //   for (var k in oldobj) {
+      //     if (oldobj[k] instanceof Array) {
+      //       newobj[k] = [];
+      //       deepCopy(newobj[k], oldobj[k]);
+      //     } else if (oldobj[k] instanceof Object) {
+      //       newobj[k] = {};
+      //       deepCopy(newobj[k], oldobj[k]);
+      //     } else {
+      //       newobj[k] = oldobj[k];
+      //     }
+      //   }
+      // }
+      // deepCopy(o, obj);
+      // o.msg.age = 88;
+      // console.log(o, obj);
+      // // 封装函数
+      // function DeepCopy(newobj, oldobj) {
+      //   for (var k in oldobj) {
+      //     // 判断属性类型,先获取属性
+      //     var item = oldobj[k];
+      //     // 2、判断是否为数组
+      //     if (item instanceof Array) {
+      //       newobj[k] = [];
+      //       DeepCopy(newobj[k], item);
+      //     }
+      //     // 3、判断是否为对象
+      //     else if (item instanceof Object) {
+      //       newobj[k] = {};
+      //       DeepCopy(newobj[k], item);
+      //     }
+      //     // 4、普通数据处理
+      //     else {
+      //       newobj[k] = item;
+      //     }
+      //   }
+      // }
+      // function deepCopy(newobj, oldobj) {
+      //   for (const k in oldobj) {
+      //     //先获取数据
+      //     let item = oldobj[k];
+      //     // 判断数据的类型
+      //     if (item instanceof Array) {
+      //       newobj[k] = [];
+      //       deepCopy(newobj[k], item);
+      //     } else if (item instanceof Object) {
+      //       newobj[k] = {};
+      //       deepCopy(newobj[k], item);
+      //     } else {
+      //       newobj[k] = item;
+      //     }
+      //   }
+      // }
+      // deepCopy(o, obj);
+      // console.log(o);
+      // o.age = 20;
+      // o.color.push('lawngreen');
+      // console.log(obj);
+    </script>
+  </body>
+</html>
