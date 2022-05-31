@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./lib/bootstrap.css" />
+    <script src="./lib/jquery.js"></script>
+  </head>
+
+  <body style="padding: 15px">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">图书表格</h3>
+      </div>
+      <div class="panel-body form-inline">
+        <div class="input-group">
+          <div class="input-group-addon">书名</div>
+          <input
+            type="text"
+            class="form-control"
+            id="iptBookname"
+            placeholder="请输入书名"
+          />
+        </div>
+        <div class="input-group">
+          <div class="input-group-addon">作者</div>
+          <input
+            type="text"
+            class="form-control"
+            id="iptAuthor"
+            placeholder="请输入作者"
+          />
+        </div>
+        <div class="input-group">
+          <div class="input-group-addon">出版社</div>
+          <input
+            type="text"
+            class="form-control"
+            id="iptPublisher"
+            placeholder="请输入出版社"
+          />
+        </div>
+        <button id="btnAdd" class="btn btn-primary">添加</button>
+      </div>
+    </div>
+
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>书名</th>
+          <th>作者</th>
+          <th>出版社</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody id="tb">
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+        </tr>
+      </tbody>
+    </table>
+    <script>
+      // 获取根路径
+      const baseUrl = `http://www.liulongbin.top:3006`;
+      //1、获取列表
+      const getBookList = () => {
+        $.get(baseUrl + '/api/getbooks', (res) => {
+          // console.log(res);
+          const { data } = res; //对象解构出data
+          //   console.log(data);
+          const newTrs = [];
+          // 遍历data数组
+          data.forEach((item) => {
+            let str = `
+           <tr>
+          <td>${item.id}</td>
+          <td>${item.bookname}</td>
+          <td>${item.author}</td>
+          <td>${item.publisher}</td>
+          <td><a href='#' class='del' data-id='${item.id}'>删除</a></td>
+        </tr>`;
+            newTrs.push(str);
+          });
+          //   先清空数据，添加newtrs到tbody中
+          $('#tb').empty().append(newTrs);
+        });
+      };
+
+      //2、添加列表
+      $('#btnAdd').on('click', function () {
+        // 2.1获取input的value值，作为post的data参数。
+        const newBooks = {
+          bookname: $('#iptBookname').val().trim(),
+          author: $('#iptAuthor').val().trim(),
+          publisher: $('#iptPublisher').val().trim(),
+        };
+        // console.log(newBooks);
+        // 2.2发起post请求
+        $.post(baseUrl + '/api/addbook', newBooks, (res) => {
+          console.log(res);
+          const { status, msg } = res; //解构响应的结果{ status:201, msg :'...'}
+          // 如果添加失败，弹窗msg。
+          if (status !== 201) return alert(status);
+          // 如果添加成功，弹窗msg，清空input内容。
+          else {
+            alert(status);
+            $('#iptBookname').val('');
+            $('#iptAuthor').val('');
+            $('#iptPublisher').val('');
+            getBookList();
+          }
+        });
+      });
+
+      // 3、删除列表
+      // 3.1给a加类名del,以及data-id自定义属性
+      // 3.2给tbody绑定事件委托，不能直接给a绑定，由于a是动态添加的，不能绑定上。
+      $('#tb').on('click', '.del', function () {
+        // 获取【点击触发的a】的自定义属性，data-id
+        let id = $(this).attr('data-id');
+        // console.log(id);//列表中的id
+        // 3.3发起get请求
+        $.ajax({
+          type: 'GET',
+          url: baseUrl + '/api/delbook',
+          data: { id: id },
+          success: (res) => {
+            const { msg } = res;
+            alert(msg);
+            getBookList();
+          },
+        });
+      });
+
+      // 4、初始化加载列表
+      getBookList();
+    </script>
+  </body>
+</html>
