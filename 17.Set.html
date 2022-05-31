@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Set</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Set 数据结构
+      // ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值
+      // Set本身是一个构造函数，用来生成 Set 数据结构
+      // 语法：const s = new Set();
+      // Set函数可以接受【一个数组】作为参数，用来初始化
+      const set = new Set([1, 2, 3, 4, 4]); //传入一个数组
+
+      console.log(set); //Set(4) {1, 2, 3, 4},去重。
+      // 1、数组去重 方法1
+      let arr = [1, 2, 3, 3, 4, 4, 4];
+      let res = Array.from(new Set(arr));
+      console.log(res); //(4) [1, 2, 3, 4]
+      // 数组去重 方法2
+      let res1 = new Set(arr); //set类似于数组
+      let newArr = [...res1];
+      console.log(newArr); //[1, 2, 3, 4],Array数组
+
+      // 2、add（value），添加某个值，一次添加一个add（3），返回set结构本身
+      let s = new Set();
+      s.add(1).add(2);
+      console.log(s); //Set(2) {1, 2}
+
+      // 3、delete（value），删除某个值，返回布尔值，表示删除是否成功
+      let s3 = new Set([1, 2, 3, 4]);
+      s3.delete(3);
+      console.log(s3); //Set(3) {1, 2, 4}
+
+      // 4、has(value),返回布尔值，表示该值是否为set成员
+      let s4 = new Set([1, 2, 3, 4]);
+      let res2 = s4.has(3);
+      console.log(res2); //true
+
+      // 5、clear(),清除所有成员
+      let s5 = new Set([1, 2, 3, 4]);
+      s5.clear();
+      console.log(s5); // {}   Set(0) {size: 0}
+
+      // 6、forEach，set结构的实例与数组一样，也拥有forEach，对每个成员执行某种操作，没有返回值
+      let s6 = new Set([1, 2, 3, 4]);
+      s6.forEach((value) => console.log(value)); //1 2 3 4
+    </script>
+  </body>
+</html>

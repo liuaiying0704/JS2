@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>箭头函数面试题</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // 情形1
+      var age = 100;
+      var obj = {
+        age: 20,
+        say: function () {
+          return () => {
+            alert(this.age); //20
+          };
+        },
+      };
+      obj.say()(); //箭头函数的上一级的this是obj
+
+      // 情形2
+      var age = 100;
+      var obj = {
+        age: 20,
+        say: () => {
+          alert(this.age); //100
+        },
+      };
+      obj.say(); //调用到箭头函数的上一级的window
+    </script>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>扩展运算符</title>
+  </head>
+  <body>
+    <div>1</div>
+    <div>4</div>
+    <div>3</div>
+    <div>6</div>
+    <div>2</div>
+    <div>5</div>
+    <script type="text/javascript">
+      // 扩展运算符可以将数组拆分成以逗号分隔的参数序列
+      const arr = [1, 2, 3, 4, 5];
+      console.log(...arr);
+      // 扩展运算符应用于数组合并
+      const arr1 = [1, 2];
+      const arr2 = [3, 4];
+      const arr3 = [...arr1, ...arr2];
+      console.log(arr3);
+      // 合并数组的第二种方法
+      arr1.push(...arr2);
+      console.log(arr1);
+      // 利用扩展运算符将伪数组转换为真正的数组
+      const divs = document.querySelectorAll('div');
+      console.log(divs);
+      const newArr = [...divs];
+      console.log(newArr);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Array.from方法</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var arrayLike = {
+        0: '张三',
+        1: '李四',
+        2: '王五',
+        3: '李四',
+        length: 3,
+      };
+
+      var arrLike = {
+        0: '1',
+        1: '2',
+        length: 2,
+      };
+
+      var newArr = Array.from(arrayLike);
+      console.log(newArr); //['张三', '李四', '王五']
+      // 字符串转数组   或   split
+      let str = 'adjgngnjkskkak';
+      const newStr = Array.from(str);
+      console.log(newStr);
+    </script>
+  </body>
+</html>

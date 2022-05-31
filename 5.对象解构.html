@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>对象解构</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // 对象解构允许我们使用变量的名字匹配对象的属性 匹配成功 将对象属性的值赋值给变量
+      const obj = {
+        uname: 'zs',
+        age: 18,
+      };
+      // 写法1
+      // let { uname, age } = obj; //左边花括号内一定是属性名
+      // console.log(uname, age); //zs  18
+
+      // 写法2
+      let { uname: data, age } = obj; //改属性名，重新赋值为uname===data
+      console.log(data, age); //zs  18
+      console.log(obj); //{uname: 'zs', age: 18}
+    </script>
+  </body>
+</html>
